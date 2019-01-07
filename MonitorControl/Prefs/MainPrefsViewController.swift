@@ -17,7 +17,8 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
 	var toolbarItemImage: NSImage? = NSImage.init(named: NSImage.preferencesGeneralName)
 	let prefs = UserDefaults.standard
 
-	@IBOutlet var startAtLogin: NSButton!
+    @IBOutlet var versionLabel: NSTextField!
+    @IBOutlet var startAtLogin: NSButton!
 	@IBOutlet var showContrastSlider: NSButton!
 	@IBOutlet var lowerContrast: NSButton!
 
@@ -27,10 +28,11 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
 		startAtLogin.state = prefs.bool(forKey: Utils.PrefKeys.startAtLogin.rawValue) ? .on : .off
 		showContrastSlider.state = prefs.bool(forKey: Utils.PrefKeys.showContrast.rawValue) ? .on : .off
 		lowerContrast.state = prefs.bool(forKey: Utils.PrefKeys.lowerContrast.rawValue) ? .on : .off
+        setVersionNumber()
     }
 
 	@IBAction func startAtLoginClicked(_ sender: NSButton) {
-		let identifier = "me.guillaumeb.MonitorControlHelper" as CFString
+		let identifier = "me.jonivr.MonitorControlHelper" as CFString
 		switch sender.state {
 		case .on:
 			prefs.set(true, forKey: Utils.PrefKeys.startAtLogin.rawValue)
@@ -75,4 +77,10 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
 		print("Toggle lower contrast after brightness state -> \(sender.state == .on ? "on" : "off")")
 		#endif
 	}
+    
+    fileprivate func setVersionNumber() {
+        let versionNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") ?? "unknown"
+        let buildNumber: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
+        versionLabel.stringValue = "version \(versionNumber) build \(buildNumber)"
+    }
 }

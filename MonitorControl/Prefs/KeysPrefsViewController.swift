@@ -33,5 +33,4 @@ class KeysPrefsViewController: NSViewController, MASPreferencesViewController {
 
 		NotificationCenter.default.post(name: Notification.Name.init(Utils.PrefKeys.listenFor.rawValue), object: nil)
 	}
-
 }

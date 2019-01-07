@@ -211,6 +211,7 @@
 				56754EA91D9A4016007BCDC5 /* Resources */,
 				9DD5968596EFAF0E2EB56496 /* [CP] Embed Pods Frameworks */,
 				F06792F5200A73FA0066C438 /* [Login] Copy Helper to start at Login */,
+				6C44EFC121E37E2300193E06 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -306,6 +307,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		6C44EFC121E37E2300193E06 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${INFOPLIST_FILE}\"\n";
+		};
 		9DD5968596EFAF0E2EB56496 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

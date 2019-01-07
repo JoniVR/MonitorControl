@@ -11,11 +11,11 @@
             <objects>
                 <viewController storyboardIdentifier="MainPrefsVC" id="HNb-aq-vnV" customClass="MainPrefsViewController" customModule="MonitorControl" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="iuQ-z6-BGz">
-                        <rect key="frame" x="0.0" y="0.0" width="400" height="161"/>
+                        <rect key="frame" x="0.0" y="0.0" width="404" height="208"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8KQ-j9-ddv">
-                                <rect key="frame" x="18" y="112" width="92" height="29"/>
+                                <rect key="frame" x="18" y="159" width="92" height="29"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="General" id="ocE-Cc-2bi">
                                     <font key="font" metaFont="systemBold" size="24"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -52,8 +52,17 @@
                                     <action selector="lowerContrastClicked:" target="HNb-aq-vnV" id="hki-Wc-jOF"/>
                                 </connections>
                             </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VKf-wZ-VBV">
+                                <rect key="frame" x="18" y="122" width="99" height="17"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="MonitorControl " id="aS8-D3-Tee">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="VKf-wZ-VBV" secondAttribute="trailing" constant="20" id="1LX-f5-00V"/>
                             <constraint firstItem="dZG-M6-fsQ" firstAttribute="leading" secondItem="iuQ-z6-BGz" secondAttribute="leading" constant="20" id="8QT-EO-uBJ"/>
                             <constraint firstItem="rYO-48-phB" firstAttribute="leading" secondItem="iuQ-z6-BGz" secondAttribute="leading" constant="20" id="Cyy-k9-19a"/>
                             <constraint firstItem="8KQ-j9-ddv" firstAttribute="top" secondItem="iuQ-z6-BGz" secondAttribute="top" constant="20" id="Fwh-JQ-1Cx"/>
@@ -63,22 +72,24 @@
                             <constraint firstItem="7YI-Uo-3fM" firstAttribute="leading" secondItem="iuQ-z6-BGz" secondAttribute="leading" constant="20" id="YhE-2k-Edh"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dZG-M6-fsQ" secondAttribute="trailing" constant="20" id="c5h-vI-6Dg"/>
                             <constraint firstItem="7YI-Uo-3fM" firstAttribute="top" secondItem="dZG-M6-fsQ" secondAttribute="bottom" constant="20" id="cdD-7n-hpx"/>
-                            <constraint firstItem="dZG-M6-fsQ" firstAttribute="top" secondItem="8KQ-j9-ddv" secondAttribute="bottom" constant="10" id="dPJ-ev-Y3O"/>
                             <constraint firstItem="rYO-48-phB" firstAttribute="top" secondItem="7YI-Uo-3fM" secondAttribute="bottom" constant="20" id="fF5-Zz-fCl"/>
-                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="dZG-M6-fsQ" secondAttribute="bottom" constant="20" id="gVa-4Q-fPP"/>
                             <constraint firstItem="8KQ-j9-ddv" firstAttribute="leading" secondItem="iuQ-z6-BGz" secondAttribute="leading" constant="20" id="ii0-uV-Ylg"/>
+                            <constraint firstItem="dZG-M6-fsQ" firstAttribute="top" secondItem="VKf-wZ-VBV" secondAttribute="bottom" constant="20" id="kb5-bz-zur"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8KQ-j9-ddv" secondAttribute="trailing" constant="20" id="qVn-hz-dRV"/>
+                            <constraint firstItem="VKf-wZ-VBV" firstAttribute="leading" secondItem="iuQ-z6-BGz" secondAttribute="leading" constant="20" id="uKB-14-VDh"/>
+                            <constraint firstItem="VKf-wZ-VBV" firstAttribute="top" secondItem="8KQ-j9-ddv" secondAttribute="bottom" constant="20" id="yaM-t0-7p1"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="lowerContrast" destination="rYO-48-phB" id="hSm-0P-Uur"/>
                         <outlet property="showContrastSlider" destination="7YI-Uo-3fM" id="bPT-Jq-Lfc"/>
                         <outlet property="startAtLogin" destination="dZG-M6-fsQ" id="Rwg-dp-vIj"/>
+                        <outlet property="versionLabel" destination="VKf-wZ-VBV" id="aeq-dO-0I7"/>
                     </connections>
                 </viewController>
                 <customObject id="ALN-AB-CU5" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="156" y="227"/>
+            <point key="canvasLocation" x="158" y="238"/>
         </scene>
         <!--Keys Prefs View Controller-->
         <scene sceneID="DmR-ia-4qL">
