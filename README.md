@@ -56,19 +56,16 @@ Open [issues](./issues) if you have a question, an enhancement to suggest or a b
 - Xcode
 - [Cocoapods](https://cocoapods.org/)
 
-Download the [zip](https://github.com/JoniVR/MonitorControl/archive/master.zip) directly or clone the project somewhere with git
-
+Clone the project
 ```sh
-$ git clone https://github.com/JoniVR/MonitorControl.git
+git clone https://github.com/the0neyouseek/MonitorControl.git --recurse-submodules
 ```
-
 Then download the dependencies with Cocoapods
-
 ```sh
 $ pod install
 ```
 
-You're all set ! Now open the `MonitorControl.xcworkspace` with Xcode
+You're all set! Now open the `MonitorControl.xcworkspace` with Xcode.
 
 ### Third party dependencies
 
@@ -79,7 +76,7 @@ You're all set ! Now open the `MonitorControl.xcworkspace` with Xcode
 
 ## Support
 - macOS Sierra (`10.12`) and up.
-- Works with monitors comptaible with [@kfix/ddcctl](https://github.com/kfix/ddcctl)
+- Works with monitors compatible with [@kfix/ddcctl](https://github.com/kfix/ddcctl)
 
 ## Thanks
 - [@bluejamesbond](https://github.com/bluejamesbond/) (Original developer)
