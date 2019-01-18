@@ -14,6 +14,7 @@
 		6C33119021C58BF600971151 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6C33118921C58BF500971151 /* README.md */; };
 		6C33119221C58BF600971151 /* ddcctl.sh in Resources */ = {isa = PBXBuildFile; fileRef = 6C33118C21C58BF500971151 /* ddcctl.sh */; };
 		6C33119521C58BF600971151 /* DDC.c in Sources */ = {isa = PBXBuildFile; fileRef = 6C33118F21C58BF600971151 /* DDC.c */; };
+		6CFF6C6321EE707600D1FDCC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFF6C6221EE707600D1FDCC /* Extensions.swift */; };
 		F03A8DF21FFBAA6F0034DC27 /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03A8DF11FFBAA6F0034DC27 /* Display.swift */; };
 		F0445D3820023E710025AE82 /* MainPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0445D3720023E710025AE82 /* MainPrefsViewController.swift */; };
 		F0445D3D200254FA0025AE82 /* KeysPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0445D3B200254FA0025AE82 /* KeysPrefsViewController.swift */; };
@@ -57,6 +58,7 @@
 		6C33118D21C58BF500971151 /* ddcctl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ddcctl.m; sourceTree = "<group>"; };
 		6C33118E21C58BF500971151 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		6C33118F21C58BF600971151 /* DDC.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = DDC.c; sourceTree = "<group>"; };
+		6CFF6C6221EE707600D1FDCC /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		F03A8DF11FFBAA6F0034DC27 /* Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Display.swift; sourceTree = "<group>"; };
 		F0445D3720023E710025AE82 /* MainPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPrefsViewController.swift; sourceTree = "<group>"; };
 		F0445D3B200254FA0025AE82 /* KeysPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeysPrefsViewController.swift; sourceTree = "<group>"; };
@@ -137,8 +139,8 @@
 		56754EAD1D9A4016007BCDC5 /* MonitorControl */ = {
 			isa = PBXGroup;
 			children = (
+				6CFF6C6121EE706000D1FDCC /* Util */,
 				56754EAE1D9A4016007BCDC5 /* AppDelegate.swift */,
-				F091C9B71F6EA79B0096FD65 /* Utils.swift */,
 				F0445D43200282E60025AE82 /* Main.storyboard */,
 				56754EB21D9A4016007BCDC5 /* MainMenu.xib */,
 				F0445D3620023D5B0025AE82 /* Prefs */,
@@ -149,6 +151,15 @@
 				56754EB51D9A4016007BCDC5 /* Info.plist */,
 			);
 			path = MonitorControl;
+			sourceTree = "<group>";
+		};
+		6CFF6C6121EE706000D1FDCC /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				F091C9B71F6EA79B0096FD65 /* Utils.swift */,
+				6CFF6C6221EE707600D1FDCC /* Extensions.swift */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 		8ABFD04A9742F18299723076 /* Frameworks */ = {
@@ -376,6 +387,7 @@
 				F03A8DF21FFBAA6F0034DC27 /* Display.swift in Sources */,
 				F091C9B31F6EA6110096FD65 /* SliderHandler.swift in Sources */,
 				56754EAF1D9A4016007BCDC5 /* AppDelegate.swift in Sources */,
+				6CFF6C6321EE707600D1FDCC /* Extensions.swift in Sources */,
 				F0445D3820023E710025AE82 /* MainPrefsViewController.swift in Sources */,
 				F0445D3D200254FA0025AE82 /* KeysPrefsViewController.swift in Sources */,
 				F091C9B81F6EA79B0096FD65 /* Utils.swift in Sources */,

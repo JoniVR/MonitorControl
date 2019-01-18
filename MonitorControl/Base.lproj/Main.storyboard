@@ -11,11 +11,11 @@
             <objects>
                 <viewController storyboardIdentifier="MainPrefsVC" id="HNb-aq-vnV" customClass="MainPrefsViewController" customModule="MonitorControl" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="iuQ-z6-BGz">
-                        <rect key="frame" x="0.0" y="0.0" width="404" height="208"/>
+                        <rect key="frame" x="0.0" y="0.0" width="404" height="245"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8KQ-j9-ddv">
-                                <rect key="frame" x="18" y="159" width="92" height="29"/>
+                                <rect key="frame" x="18" y="196" width="92" height="29"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="General" id="ocE-Cc-2bi">
                                     <font key="font" metaFont="systemBold" size="24"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -23,7 +23,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dZG-M6-fsQ">
-                                <rect key="frame" x="18" y="86" width="199" height="18"/>
+                                <rect key="frame" x="18" y="123" width="199" height="18"/>
                                 <buttonCell key="cell" type="check" title="Start MonitorControl at Login" bezelStyle="regularSquare" imagePosition="left" inset="2" id="UTh-SV-vAQ">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -33,7 +33,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7YI-Uo-3fM">
-                                <rect key="frame" x="18" y="52" width="177" height="18"/>
+                                <rect key="frame" x="18" y="89" width="177" height="18"/>
                                 <buttonCell key="cell" type="check" title="Show a slider for contrast" bezelStyle="regularSquare" imagePosition="left" inset="2" id="8cS-Fg-fKy">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -43,7 +43,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rYO-48-phB">
-                                <rect key="frame" x="18" y="18" width="215" height="18"/>
+                                <rect key="frame" x="18" y="55" width="215" height="18"/>
                                 <buttonCell key="cell" type="check" title="Lower Contrast after Brightness" bezelStyle="regularSquare" imagePosition="left" inset="2" id="JDl-l4-s8k">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -53,23 +53,59 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VKf-wZ-VBV">
-                                <rect key="frame" x="18" y="122" width="99" height="17"/>
+                                <rect key="frame" x="18" y="159" width="99" height="17"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="MonitorControl " id="aS8-D3-Tee">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="12" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vSe-nB-yiS">
+                                <rect key="frame" x="20" y="20" width="115" height="22"/>
+                                <subviews>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="68N-aS-0B0">
+                                        <rect key="frame" x="-2" y="2" width="86" height="18"/>
+                                        <buttonCell key="cell" type="check" title="IntelliDock" bezelStyle="regularSquare" imagePosition="left" inset="2" id="EHs-Pc-7lb">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="intelliDockClicked:" target="HNb-aq-vnV" id="KyK-kv-I3s"/>
+                                        </connections>
+                                    </button>
+                                    <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OgY-uH-xOf">
+                                        <rect key="frame" x="92" y="-3" width="25" height="25"/>
+                                        <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="HOL-2y-gru">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="intelliDockHelpClicked:" target="HNb-aq-vnV" id="e9J-2B-feH"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="VKf-wZ-VBV" secondAttribute="trailing" constant="20" id="1LX-f5-00V"/>
+                            <constraint firstItem="vSe-nB-yiS" firstAttribute="leading" secondItem="iuQ-z6-BGz" secondAttribute="leading" constant="20" id="1U1-AH-4k0"/>
                             <constraint firstItem="dZG-M6-fsQ" firstAttribute="leading" secondItem="iuQ-z6-BGz" secondAttribute="leading" constant="20" id="8QT-EO-uBJ"/>
                             <constraint firstItem="rYO-48-phB" firstAttribute="leading" secondItem="iuQ-z6-BGz" secondAttribute="leading" constant="20" id="Cyy-k9-19a"/>
                             <constraint firstItem="8KQ-j9-ddv" firstAttribute="top" secondItem="iuQ-z6-BGz" secondAttribute="top" constant="20" id="Fwh-JQ-1Cx"/>
+                            <constraint firstAttribute="bottom" secondItem="vSe-nB-yiS" secondAttribute="bottom" constant="20" id="Hm3-p5-lNw"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="7YI-Uo-3fM" secondAttribute="trailing" constant="20" id="Jtd-pc-orO"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="vSe-nB-yiS" secondAttribute="trailing" constant="20" id="REQ-hn-rKJ"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="rYO-48-phB" secondAttribute="trailing" constant="20" id="XEL-Kb-iUl"/>
-                            <constraint firstAttribute="bottom" secondItem="rYO-48-phB" secondAttribute="bottom" constant="20" id="YZb-sI-14r"/>
                             <constraint firstItem="7YI-Uo-3fM" firstAttribute="leading" secondItem="iuQ-z6-BGz" secondAttribute="leading" constant="20" id="YhE-2k-Edh"/>
+                            <constraint firstItem="vSe-nB-yiS" firstAttribute="top" secondItem="rYO-48-phB" secondAttribute="bottom" constant="15" id="aqa-BE-u7B"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dZG-M6-fsQ" secondAttribute="trailing" constant="20" id="c5h-vI-6Dg"/>
                             <constraint firstItem="7YI-Uo-3fM" firstAttribute="top" secondItem="dZG-M6-fsQ" secondAttribute="bottom" constant="20" id="cdD-7n-hpx"/>
                             <constraint firstItem="rYO-48-phB" firstAttribute="top" secondItem="7YI-Uo-3fM" secondAttribute="bottom" constant="20" id="fF5-Zz-fCl"/>
@@ -83,13 +119,14 @@
                     <connections>
                         <outlet property="lowerContrast" destination="rYO-48-phB" id="hSm-0P-Uur"/>
                         <outlet property="showContrastSlider" destination="7YI-Uo-3fM" id="bPT-Jq-Lfc"/>
+                        <outlet property="smartDock" destination="68N-aS-0B0" id="ZTG-Yl-sGe"/>
                         <outlet property="startAtLogin" destination="dZG-M6-fsQ" id="Rwg-dp-vIj"/>
                         <outlet property="versionLabel" destination="VKf-wZ-VBV" id="aeq-dO-0I7"/>
                     </connections>
                 </viewController>
                 <customObject id="ALN-AB-CU5" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="158" y="238"/>
+            <point key="canvasLocation" x="158" y="224.5"/>
         </scene>
         <!--Keys Prefs View Controller-->
         <scene sceneID="DmR-ia-4qL">

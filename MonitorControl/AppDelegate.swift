@@ -36,7 +36,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         app = self
-        
         setupLayout()
         subscribeEventListeners()
         setVolumeKeysMode()
@@ -92,6 +91,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func updateDisplays() {
         clearDisplays()
+
+        // Intellidock check
+        if UserDefaults.standard.bool(forKey: Utils.PrefKeys.intelliDock.rawValue) {
+            Utils.updateDockAutohide()
+        }
         
         var filteredScreens = NSScreen.screens.filter { screen -> Bool in
             if let id = screen.deviceDescription[NSDeviceDescriptionKey.init("NSScreenNumber")] as? CGDirectDisplayID {

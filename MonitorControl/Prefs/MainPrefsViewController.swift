@@ -21,6 +21,8 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
     @IBOutlet var startAtLogin: NSButton!
 	@IBOutlet var showContrastSlider: NSButton!
 	@IBOutlet var lowerContrast: NSButton!
+    @IBOutlet var intelliDock: NSButton!
+
 
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,7 +79,25 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
 		print("Toggle lower contrast after brightness state -> \(sender.state == .on ? "on" : "off")")
 		#endif
 	}
+
+    @IBAction func intelliDockClicked(_ sender: NSButton) {
+        switch sender.state {
+        case .on:
+            prefs.set(true, forKey: Utils.PrefKeys.intelliDock.rawValue)
+        case .off:
+            prefs.set(false, forKey: Utils.PrefKeys.intelliDock.rawValue)
+        default: break
+        }
+        Utils.updateDockAutohide()
+        #if DEBUG
+        print("Toggle Intellidock state -> \(sender.state == .on ? "on" : "off")")
+        #endif
+    }
     
+    @IBAction func intelliDockHelpClicked(_ sender: NSButton) {
+        // TODO: show popover with help.
+    }
+
     fileprivate func setVersionNumber() {
         let versionNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") ?? "unknown"
         let buildNumber: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String

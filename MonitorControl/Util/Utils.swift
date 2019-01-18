@@ -63,6 +63,61 @@ class Utils: NSObject {
 		return readCmd.success ? Int(readCmd.current_value) : nil
 	}
 
+    /// MARK - General
+
+    /// Send command to terminal.
+    ///
+    /// - Parameters:
+    ///   - command: The command you want to send to the terminal.
+    /// - Returns: A `String` from the standard output.
+    static func shell(_ command: String) -> String? {
+        let task = Process()
+        task.launchPath = "/bin/bash"
+        task.arguments = ["-c", command]
+
+        let pipe = Pipe()
+        task.standardOutput = pipe
+        task.launch()
+
+        let data = pipe.fileHandleForReading.readDataToEndOfFile()
+        let output = String(data: data, encoding: .utf8)!
+        task.waitUntilExit()
+
+        if output.count > 0 {
+            //remove newline character.
+            let lastIndex = output.index(before: output.endIndex)
+            return String(output[output.startIndex ..< lastIndex])
+        }
+        return output
+    }
+
+    // MARK - Intellidock
+
+    /// Checks if the autohide setting of the Dock needs to be enabled/disabled and does the correct thing.
+    ///
+    /// This function checks the current autohide state and saves it.
+    /// It then checks if there are external monitors connected.
+    /// When no external monitor is connected, the Dock autohide property will be set to true.
+    /// When there are external monitors connected, the Dock autohide property will be set to false.
+    /// After changing the autohide property, the Dock will be restarted.
+    static func updateDockAutohide() {
+        if let currentDockAutohideState = shell("defaults read com.apple.dock autohide") {
+            let externalScreenCount = NSScreen.externalScreens().count
+
+            if externalScreenCount == 0 && currentDockAutohideState == "0" {
+                #if DEBUG
+                print("Enable Dock autohide")
+                #endif
+                let _ = shell("defaults write com.apple.dock autohide -bool true && killall Dock")
+            } else if externalScreenCount > 0 && currentDockAutohideState == "1" {
+                #if DEBUG
+                print("Disable Dock autohide")
+                #endif
+                let _ = Utils.shell("defaults write com.apple.dock autohide -bool false && killall Dock")
+            }
+        }
+    }
+
 	// MARK: - Menu
 
 	/// Create a label
@@ -240,6 +295,11 @@ class Utils: NSObject {
 
 		/// Change Brightness/Volume for all screens
 		case allScreens
+
+        /// Automatically turn on/off autohiding of the Dock if external monitor is connected.
+        /// external monitor -> Dock autohide disabled
+        /// internal monitor -> Dock autohide enabled
+        case intelliDock
 	}
 
 	/// Keys for the value of listenFor option
