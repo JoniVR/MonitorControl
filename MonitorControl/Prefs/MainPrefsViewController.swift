@@ -30,6 +30,7 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
 		startAtLogin.state = prefs.bool(forKey: Utils.PrefKeys.startAtLogin.rawValue) ? .on : .off
 		showContrastSlider.state = prefs.bool(forKey: Utils.PrefKeys.showContrast.rawValue) ? .on : .off
 		lowerContrast.state = prefs.bool(forKey: Utils.PrefKeys.lowerContrast.rawValue) ? .on : .off
+        intelliDock.state = prefs.bool(forKey: Utils.PrefKeys.intelliDock.rawValue) ? .on : .off
         setVersionNumber()
     }
 

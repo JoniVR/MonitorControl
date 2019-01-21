@@ -117,6 +117,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="intelliDock" destination="68N-aS-0B0" id="EJw-Fu-nJx"/>
                         <outlet property="lowerContrast" destination="rYO-48-phB" id="hSm-0P-Uur"/>
                         <outlet property="showContrastSlider" destination="7YI-Uo-3fM" id="bPT-Jq-Lfc"/>
                         <outlet property="smartDock" destination="68N-aS-0B0" id="ZTG-Yl-sGe"/>
