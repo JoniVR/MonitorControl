@@ -23,7 +23,6 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
 	@IBOutlet var lowerContrast: NSButton!
     @IBOutlet var intelliDock: NSButton!
 
-
 	override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -93,10 +92,6 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
         #if DEBUG
         print("Toggle Intellidock state -> \(sender.state == .on ? "on" : "off")")
         #endif
-    }
-    
-    @IBAction func intelliDockHelpClicked(_ sender: NSButton) {
-        // TODO: show popover with help.
     }
 
     fileprivate func setVersionNumber() {
