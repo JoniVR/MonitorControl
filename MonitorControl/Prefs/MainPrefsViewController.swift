@@ -96,7 +96,7 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
 
     fileprivate func setVersionNumber() {
         let versionNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") ?? "unknown"
-        let buildNumber: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
+        let buildNumber: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "unknown"
         versionLabel.stringValue = "version \(versionNumber) build \(buildNumber)"
     }
 }

@@ -55,6 +55,7 @@ Open [issues](./issues) if you have a question, an enhancement to suggest or a b
 
 - Xcode
 - [Cocoapods](https://cocoapods.org/)
+- [SwiftLint](https://github.com/realm/SwiftLint)
 
 Clone the project
 ```sh

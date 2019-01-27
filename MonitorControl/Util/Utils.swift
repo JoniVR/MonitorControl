@@ -91,7 +91,7 @@ class Utils: NSObject {
         return output
     }
 
-    // MARK - Intellidock
+    /// MARK - Intellidock
 
     /// Checks if the autohide setting of the Dock needs to be enabled/disabled and does the correct thing.
     ///
@@ -108,12 +108,12 @@ class Utils: NSObject {
                 #if DEBUG
                 print("Enable Dock autohide")
                 #endif
-                let _ = shell("defaults write com.apple.dock autohide -bool true && killall Dock")
+                _ = shell("defaults write com.apple.dock autohide -bool true && killall Dock")
             } else if externalScreenCount > 0 && currentDockAutohideState == "1" {
                 #if DEBUG
                 print("Disable Dock autohide")
                 #endif
-                let _ = Utils.shell("defaults write com.apple.dock autohide -bool false && killall Dock")
+                _ = Utils.shell("defaults write com.apple.dock autohide -bool false && killall Dock")
             }
         }
     }

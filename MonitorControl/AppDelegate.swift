@@ -18,22 +18,22 @@ let prefs = UserDefaults.standard
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-    
+
     @IBOutlet weak var statusMenu: NSMenu!
     @IBOutlet weak var window: NSWindow!
-    
+
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-    
+
     var monitorItems: [NSMenuItem] = []
     var displays: [Display] = []
-    
+
     let step = 100/16
-    
+
     var mediaKeyTap: MediaKeyTap?
     var prefsController: NSWindowController?
-    
+
     var keysListenedFor: [MediaKey] = [.brightnessUp, .brightnessDown, .mute, .volumeUp, .volumeDown]
-    
+
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         app = self
         setupLayout()
@@ -46,11 +46,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         CGDisplayRegisterReconfigurationCallback({_, _, _ in app.updateDisplays()}, nil)
         updateDisplays()
     }
-    
+
     @IBAction func quitClicked(_ sender: AnyObject) {
         NSApplication.shared.terminate(self)
     }
-    
+
     @IBAction func prefsClicked(_ sender: AnyObject) {
         if let prefsController = prefsController {
             prefsController.showWindow(sender)
@@ -58,20 +58,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             prefsController.window?.makeKeyAndOrderFront(sender)
         }
     }
-    
+
     /// Set the default prefs of the app
     func setDefaultPrefs() {
         let prefs = UserDefaults.standard
         if !prefs.bool(forKey: Utils.PrefKeys.appAlreadyLaunched.rawValue) {
             prefs.set(true, forKey: Utils.PrefKeys.appAlreadyLaunched.rawValue)
-            
+
             prefs.set(false, forKey: Utils.PrefKeys.startAtLogin.rawValue)
-            
+
             prefs.set(false, forKey: Utils.PrefKeys.showContrast.rawValue)
             prefs.set(false, forKey: Utils.PrefKeys.lowerContrast.rawValue)
         }
     }
-    
+
     // MARK: - Menu
     func clearDisplays() {
         if statusMenu.items.count > 2 {
@@ -79,16 +79,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             for i in 0..<statusMenu.items.count - 2 {
                 items.append(statusMenu.items[i])
             }
-            
+
             for item in items {
                 statusMenu.removeItem(item)
             }
         }
-        
+
         monitorItems = []
         displays = []
     }
-    
+
     func updateDisplays() {
         clearDisplays()
 
@@ -96,25 +96,25 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if UserDefaults.standard.bool(forKey: Utils.PrefKeys.intelliDock.rawValue) {
             Utils.updateDockAutohide()
         }
-        
+
         var filteredScreens = NSScreen.screens.filter { screen -> Bool in
             if let id = screen.deviceDescription[NSDeviceDescriptionKey.init("NSScreenNumber")] as? CGDirectDisplayID {
                 // Is Built In Screen (e.g. MBP/iMac Screen)
                 if CGDisplayIsBuiltin(id) != 0 {
                     return false
                 }
-                
+
                 // Does screen support EDID ?
                 var edid = EDID()
                 if !EDIDTest(id, &edid) {
                     return false
                 }
-                
+
                 return true
             }
             return false
         }
-        
+
         if filteredScreens.count == 1 {
             self.addScreenToMenu(screen: filteredScreens[0], asSubMenu: false)
         } else {
@@ -122,7 +122,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 self.addScreenToMenu(screen: screen, asSubMenu: true)
             }
         }
-        
+
         if filteredScreens.count == 0 {
             // If no DDC capable display was detected
             let item = NSMenuItem()
@@ -132,7 +132,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             statusMenu.insertItem(item, at: 0)
         }
     }
-    
+
     /// Add a screen to the menu
     ///
     /// - Parameters:
@@ -140,14 +140,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     ///   - asSubMenu: Display in a sub menu or directly in menu
     private func addScreenToMenu(screen: NSScreen, asSubMenu: Bool) {
         if let id = screen.deviceDescription[NSDeviceDescriptionKey.init("NSScreenNumber")] as? CGDirectDisplayID {
-            
+
             var edid = EDID()
             if EDIDTest(id, &edid) {
                 let name = Utils.getDisplayName(forEdid: edid)
                 let serial = Utils.getDisplaySerial(forEdid: edid)
-                
+
                 let display = Display.init(id, name: name, serial: serial)
-                
+
                 let monitorSubMenu: NSMenu = asSubMenu ? NSMenu() : statusMenu
                 let volumeSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
                                                                   forDisplay: display,
@@ -164,23 +164,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                                                                         title: NSLocalizedString("Contrast", comment: "Shown in menu"))
                     display.contrastSliderHandler = contrastSliderHandler
                 }
-                
+
                 display.volumeSliderHandler = volumeSliderHandler
                 display.brightnessSliderHandler = brightnessSliderHandler
                 displays.append(display)
-                
+
                 let monitorMenuItem = NSMenuItem()
                 monitorMenuItem.title = "\(name)"
                 if asSubMenu {
                     monitorMenuItem.submenu = monitorSubMenu
                 }
-                
+
                 monitorItems.append(monitorMenuItem)
                 statusMenu.insertItem(monitorMenuItem, at: 0)
             }
         }
     }
-    
+
     private func setupLayout() {
         let storyboard: NSStoryboard = NSStoryboard.init(name: "Main", bundle: Bundle.main)
         let views = [
@@ -190,12 +190,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         ]
         prefsController = MASPreferencesWindowController(viewControllers: views, title: NSLocalizedString("Preferences", comment: "Shown in Preferences window"))
     }
-    
+
     private func subscribeEventListeners() {
         // subscribe KeyTap event listener
         NotificationCenter.default.addObserver(self, selector: #selector(handleListenForChanged), name: NSNotification.Name.init(Utils.PrefKeys.listenFor.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleShowContrastChanged), name: NSNotification.Name.init(Utils.PrefKeys.showContrast.rawValue), object: nil)
-        
+
         // subscribe Audio output detector (AMCoreAudio)
         NotificationCenter.defaultCenter.subscribe(self, eventType: AudioHardwareEvent.self, dispatchQueue: DispatchQueue.main)
     }
@@ -203,12 +203,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 // MARK: - Media Key Tap delegate
 extension AppDelegate: MediaKeyTapDelegate {
-    
+
     func handle(mediaKey: MediaKey, event: KeyEvent?) {
-        
+
         guard let currentDisplay = Utils.getCurrentDisplay(from: displays) else { return }
         let allDisplays = prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? displays : [currentDisplay]
-        
+
         for display in allDisplays {
             if (prefs.object(forKey: "\(display.identifier)-state") as? Bool) ?? true {
                 switch mediaKey {
@@ -226,31 +226,31 @@ extension AppDelegate: MediaKeyTapDelegate {
                 case .volumeDown:
                     let value = display.calcNewValue(for: AUDIO_SPEAKER_VOLUME, withRel: -step)
                     display.setVolume(to: value)
-                    
+
                 default:
                     return
                 }
             }
         }
-        
+
     }
-    
+
     // MARK: - Prefs notification
     @objc func handleListenForChanged() {
         readKeyListenPreferences()
         setKeysToListenFor()
     }
-    
+
     @objc func handleShowContrastChanged() {
         self.updateDisplays()
     }
-    
+
     private func setKeysToListenFor() {
         mediaKeyTap?.stop()
         mediaKeyTap = MediaKeyTap.init(delegate: self, for: keysListenedFor, observeBuiltIn: false)
         mediaKeyTap?.start()
     }
-    
+
     private func readKeyListenPreferences() {
         let listenFor = prefs.integer(forKey: Utils.PrefKeys.listenFor.rawValue)
         keysListenedFor = [.brightnessUp, .brightnessDown, .mute, .volumeUp, .volumeDown]
@@ -263,12 +263,12 @@ extension AppDelegate: MediaKeyTapDelegate {
 }
 
 extension AppDelegate: EventSubscriber {
-    
+
     /**
      Fires off when a change in default audio device is detected.
      */
     func eventReceiver(_ event: Event) {
-        
+
         switch event {
         case let event as AudioHardwareEvent:
             switch event {
@@ -283,15 +283,15 @@ extension AppDelegate: EventSubscriber {
         default: break
         }
     }
-    
+
     /**
      We check if the current default audio output device can change the volume,
      if not, we know for sure that we don't need to interact with it.
      */
     func setVolumeKeysMode() {
-        
+
         readKeyListenPreferences()
-        
+
         if let defaultOutputDevice = AudioDevice.defaultOutputDevice() {
             if defaultOutputDevice.canSetVirtualMasterVolume(direction: .playback) {
                 // Remove volume related keys
