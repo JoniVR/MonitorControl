@@ -64,11 +64,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let prefs = UserDefaults.standard
         if !prefs.bool(forKey: Utils.PrefKeys.appAlreadyLaunched.rawValue) {
             prefs.set(true, forKey: Utils.PrefKeys.appAlreadyLaunched.rawValue)
-
             prefs.set(false, forKey: Utils.PrefKeys.startAtLogin.rawValue)
-
             prefs.set(false, forKey: Utils.PrefKeys.showContrast.rawValue)
             prefs.set(false, forKey: Utils.PrefKeys.lowerContrast.rawValue)
+            prefs.set(false, forKey: Utils.PrefKeys.intelliDock.rawValue)
         }
     }
 
