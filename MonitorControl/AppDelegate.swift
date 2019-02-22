@@ -212,11 +212,26 @@ extension AppDelegate: MediaKeyTapDelegate {
             if (prefs.object(forKey: "\(display.identifier)-state") as? Bool) ?? true {
                 switch mediaKey {
                 case .brightnessUp:
-                    let value = display.calcNewValue(for: BRIGHTNESS, withRel: +step)
-                    display.setBrightness(to: value)
+                    var brightnessValue = display.readValue(for: BRIGHTNESS)
+                    var contrastValue = display.readValue(for: CONTRAST)
+                    // increase brightness after contrast
+                    if contrastValue < 70 && brightnessValue == 0 && prefs.bool(forKey: Utils.PrefKeys.lowerContrast.rawValue) {
+                        contrastValue = display.calcNewValue(for: CONTRAST, withRel: +step)
+                        display.setContrast(to: contrastValue)
+                    } else {
+                        brightnessValue = display.calcNewValue(for: BRIGHTNESS, withRel: +step)
+                    }
+                    display.setBrightness(to: brightnessValue)
                 case .brightnessDown:
-                    let value = currentDisplay.calcNewValue(for: BRIGHTNESS, withRel: -step)
-                    display.setBrightness(to: value)
+                    var brightnessValue = display.readValue(for: BRIGHTNESS)
+                    // lower contrast after brightness
+                    if brightnessValue <= 0 && prefs.bool(forKey: Utils.PrefKeys.lowerContrast.rawValue) {
+                        let contrastValue = display.calcNewValue(for: CONTRAST, withRel: -step)
+                        display.setContrast(to: contrastValue)
+                    } else {
+                        brightnessValue = display.calcNewValue(for: BRIGHTNESS, withRel: -step)
+                    }
+                    display.setBrightness(to: brightnessValue)
                 case .mute:
                     display.mute()
                 case .volumeUp:
@@ -225,13 +240,11 @@ extension AppDelegate: MediaKeyTapDelegate {
                 case .volumeDown:
                     let value = display.calcNewValue(for: AUDIO_SPEAKER_VOLUME, withRel: -step)
                     display.setVolume(to: value)
-
                 default:
                     return
                 }
             }
         }
-
     }
 
     // MARK: - Prefs notification

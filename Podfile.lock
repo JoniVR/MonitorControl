@@ -20,10 +20,10 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   MASPreferences:
-    :commit: 52b15d34b7509436c73d6e89d2b02bf29507df50
+    :commit: aa9cc4ebf8599382a239b96b000112a36c2554d3
     :git: https://github.com/JoniVR/MASPreferences.git
   MediaKeyTap:
-    :commit: a7afe10951d2800d94c04091c2684ec9e978fb3e
+    :commit: ca246d59e8bedeca24440fad67e6a5750ff71ef5
     :git: https://github.com/JoniVR/MediaKeyTap.git
 
 SPEC CHECKSUMS:
@@ -33,4 +33,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 947d8968124719d712379b2dbc0a24b1595515fe
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.0

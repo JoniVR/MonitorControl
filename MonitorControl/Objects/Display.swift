@@ -58,18 +58,6 @@ class Display {
 	}
 
 	func setBrightness(to value: Int) {
-		if prefs.bool(forKey: Utils.PrefKeys.lowerContrast.rawValue) {
-			if value == 0 {
-				Utils.sendCommand(CONTRAST, toMonitor: identifier, withValue: value)
-				if let slider = contrastSliderHandler?.slider {
-					slider.intValue = Int32(value)
-				}
-			} else if prefs.integer(forKey: "\(BRIGHTNESS)-\(identifier)") == 0 {
-				let contrastValue = prefs.integer(forKey: "\(CONTRAST)-\(identifier)")
-				Utils.sendCommand(CONTRAST, toMonitor: identifier, withValue: contrastValue)
-			}
-		}
-
 		Utils.sendCommand(BRIGHTNESS, toMonitor: identifier, withValue: value)
 		if let slider = brightnessSliderHandler?.slider {
 			slider.intValue = Int32(value)
@@ -78,14 +66,27 @@ class Display {
 		saveValue(value, for: BRIGHTNESS)
 	}
 
-	func calcNewValue(for command: Int32, withRel rel: Int) -> Int {
+    func setContrast(to value: Int) {
+        Utils.sendCommand(CONTRAST, toMonitor: identifier, withValue: value)
+        if let slider = contrastSliderHandler?.slider {
+            slider.intValue = Int32(value)
+        }
+        saveValue(value, for: CONTRAST)
+    }
+
+    func calcNewValue(for command: Int32, withRel rel: Int) -> Int {
+        let maxValue = command == CONTRAST ? 70 : 100
 		let currentValue = prefs.integer(forKey: "\(command)-\(identifier)")
-		return max(0, min(100, currentValue + rel))
+		return max(0, min(maxValue, currentValue + rel))
 	}
 
 	func saveValue(_ value: Int, for command: Int32) {
 		prefs.set(value, forKey: "\(command)-\(identifier)")
 	}
+
+    func readValue(for command: Int32) -> Int {
+        return prefs.integer(forKey: "\(command)-\(identifier)")
+    }
 
 	private func showOsd(command: Int32, value: Int) {
 		if let manager = OSDManager.sharedManager() as? OSDManager {

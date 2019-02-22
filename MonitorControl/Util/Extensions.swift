@@ -4,6 +4,7 @@
 //
 //  Created by Joni Van Roost on 15/01/2019.
 //  Copyright © 2019 Mathew Kurian. All rights reserved.
+//  MIT Licensed.
 //
 
 import AppKit

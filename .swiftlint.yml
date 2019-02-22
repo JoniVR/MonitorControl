@@ -6,3 +6,4 @@ excluded:
   - Pods
 type_body_length: 500
 file_length: 500
+cyclomatic_complexity: 11
