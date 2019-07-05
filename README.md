@@ -1,3 +1,5 @@
+⚠️ This repo is purely for historic purposes. No active development will take place here since [the0neyouseek/MonitorControl](https://github.com/the0neyouseek/MonitorControl) is active again and I'm actively contributing there. ⚠️
+
 <h1 align="center"> MonitorControl </h1>
 
 <!-- subtext -->
